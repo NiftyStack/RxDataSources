@@ -65,7 +65,9 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
                 // if view is not in view hierarchy, performing batch updates will crash the app
                 if collectionView.window == nil {
                     dataSource.setSections(newSections)
-                    collectionView.reloadData()
+                    DispatchQueue.main.async {
+                        collectionView.reloadData()
+                    }
                     return
                 }
                 let oldSections = dataSource.sectionModels
